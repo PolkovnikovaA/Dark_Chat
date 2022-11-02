@@ -1,0 +1,231 @@
+﻿<Window x:Class="Chat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chat" xmlns:viewmodel="clr-namespace:Chat.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="650" Width="1200"
+        Background="#36393F"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="321*"/>
+            <ColumnDefinition Width="358*"/>
+            <ColumnDefinition Width="321*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="4"
+                Background="#252525"
+                MouseDown="Border_MouseDown">
+
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content="Dark Chat"
+                       Foreground="Gray"
+                       FontWeight="SemiBold"/>
+
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+
+                    <Button Width="20" Height="20"
+                            Content="_"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            FontWeight="Bold"
+                            Margin="0,0,0,3"
+                            Click="ButtonMinimize_Click1"/>
+
+                    <Button Width="20" Height="20"
+                            Content="🞎"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            FontWeight="Bold"
+                            Click="WindowStateButton_Click"/>
+
+                    <Button Width="20" Height="20"
+                            Content="╳"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            FontWeight="Bold"
+                            Click="CloseButton_Click"/>
+
+                </StackPanel>
+            </Grid>
+
+        </Border>
+
+        <Grid Background="#2F3136"
+              Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Диалоги"
+                   VerticalAlignment="Center"
+                   FontWeight="Medium"
+                   Foreground="Gray"
+                   Margin="8,0,0,0"/>
+
+            <ListView ItemsSource="{Binding Contacts}"
+                      SelectedItem="{Binding SelectedContact}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Grid.Row="1"
+                      ItemContainerStyle="{StaticResource ContactCard}"
+                      Margin="0,0,0,445"/>
+
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        Background="#292B2F">
+
+                <Border CornerRadius="25"
+                        Width="30" Height="30"
+                        Background="#3bff6f"
+                        Margin="18,0,0,0"/>
+
+                <StackPanel VerticalAlignment="Center">
+                    <Label Content="Гость"
+                           Foreground="White"
+                           FontWeight="SemiBold"
+                           Margin="0,-5,0,-5"/>
+                    
+
+                    <Label Content="В сети"
+                           Foreground="Gray"
+                           FontWeight="SemiBold"
+                           FontSize="10"
+                           Margin="0,-8,0,-5"/>
+
+                </StackPanel>
+                
+                <Button Height="20" Width="20"
+                        Margin="80,0,0,0"
+                        Click="Click_Diagramm"/>
+
+            </StackPanel>
+
+        </Grid>
+
+
+        <Grid Grid.Column="1"
+              Grid.Row="1" Grid.ColumnSpan="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="#2F3136"
+                    BorderThickness="0,0,0,2">
+
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="0">
+
+
+
+                    <Label Content="@Гость"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           Margin="5,0,5,0"
+                           VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <ListView 
+                      ItemsSource="{Binding SelectedContact.Messages}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ItemContainerStyle="{StaticResource ChatItem}"
+                      Margin="4,0,4,0"
+                      Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+
+            <TextBox x:Name="Mess"
+                     Grid.Row="1" 
+                     Background="Transparent" 
+                     Margin="48,109,448,378"  FontWeight="Bold" BorderBrush="{x:Null}" Foreground="#FF0078D7"
+                     />
+
+            <TextBox x:Name="Mess1"
+                     Grid.Row="1" 
+                     Background="Transparent" 
+                     Margin="48,134,448,353" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"
+                     />
+
+            <TextBox x:Name="Mess2"
+                     Grid.Row="1" 
+                     Background="Transparent" 
+                     Margin="48,212,448,273" Foreground="#FF0078D7" FontWeight="Bold" BorderBrush="{x:Null}"
+                     />
+
+            <TextBox x:Name="Mess3"
+                     Grid.Row="1" 
+                     Background="Transparent" 
+                     Margin="48,239,448,246" Foreground="White" FontWeight="Bold" BorderBrush="{x:Null}"
+                     />
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="isxod"
+                         Height="50"
+                         Text="{Binding Message}"                         
+                         Style="{StaticResource MessageBox}"
+                          Margin="8,10,0,10"/>
+
+                <Button Click="m1"
+                        Command="{Binding SendCommand}" 
+                        Margin="17,15,24,15" Grid.Column="1">
+
+                    <Image Source="Icons\Otpravka.png"/>
+
+                </Button>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Grid.Column="1"
+                            Margin="0,0,16,0">
+
+                </StackPanel>
+
+
+
+            </Grid>
+
+
+
+
+        </Grid>
+
+
+
+    </Grid>
+</Window>
